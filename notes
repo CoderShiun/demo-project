@@ -1,0 +1,25 @@
+// For project
+cobra init --pkg-name demoPro -a Shiun --config config.toml
+cobra add config
+cobra add help
+cobra add version
+cobra add start
+
+// For grpc env
+go get -u google.golang.org/grpc
+
+// For proto (maybe do not need it)
+tar -zxvf protobuf-all-3.11.4.tar.gz
+mv protobuf-all-3.11.4.tar.gz /usr/localtar -zxvf protobuf-all-3.5.1.tar.gz
+mv protobuf-all-3.11.4.tar.gz /usr/local
+cd /usr/local/protobuf-3.11.4
+./configure
+make
+make check
+make install
+protoc -version
+
+// For grpc -> Restful
+go get -u github.com/golang/protobuf/protoc-gen-go
+go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
+go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger

@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package api;
+
+import "google/proto/annotations.proto";
+import "empty/empty.proto";
+
+// DemoService is the service applications.
+service DemoService {
+    // Create creates the given application.
+    rpc Create(CreateRequest) returns (CreateResponse) {
+        option(google.api.http) = {
+			post: "/proto/applications"
+			body: "*"
+		};
+    }
+
+    // Get returns the requested application.
+    rpc Get(GetRequest) returns (GetResponse) {
+        option(google.api.http) = {
+			get: "/proto/applications/{id}"
+		};
+    }
+
+    // Delete deletes the given application.
+    rpc Delete(DeleteRequest) returns (google.protobuf.Empty) {
+        option(google.api.http) = {
+			delete: "/proto/applications/{id}"
+		};
+    }
+
+    // UpdateHTTPIntegration updates the HTTP application-integration.
+    rpc Update(UpdateRequest) returns (google.protobuf.Empty) {
+        option(google.api.http) = {
+			put: "/proto/applications/{application_id}/integrations/http"
+			body: "*"
+		};
+    }
+}
+
+enum IntegrationKind {
+    HTTP = 0;
+}
+
+message CreateRequest {
+    string name = 1;
+}
+
+message CreateResponse {
+    bool status = 1;
+}
+
+message GetRequest {
+    int64 id = 1;
+    string name = 2;
+}
+
+message GetResponse {
+    bool status = 1;
+}
+
+message DeleteRequest {
+    int64 id = 1;
+    string name = 2;
+}
+
+message UpdateRequest {
+    int64 application_id = 1;
+    string name = 2;
+}

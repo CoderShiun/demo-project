@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package api;
+
+// Grpc service definition.
+service GrpcService {
+    rpc Get (GetGrpcRequest) returns (GetGrpcResponse) {}
+}
+
+message GetGrpcRequest {
+    string name = 1;
+}
+
+message GetGrpcResponse {
+    string message = 1;
+}
